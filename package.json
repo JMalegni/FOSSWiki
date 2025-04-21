@@ -1,7 +1,7 @@
 {
   "name": "fosswiki",
   "version": "0.1.0",
-  "homepage": "https://github.com/JMalegni/FOSSWiki",
+  "homepage": "https://jmalegni.github.io/FOSSWiki/",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

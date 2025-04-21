@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
-// This component now requires at least one alternative to be submitted.
 function AddEntryForm({ onAddEntry }) {
     // State for form fields
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
-    // State specifically for the single alternative entry fields
     const [altName, setAltName] = useState('');
     const [altType, setAltType] = useState('Open Source');
     const [altCost, setAltCost] = useState('Free');
@@ -16,17 +14,13 @@ function AddEntryForm({ onAddEntry }) {
         e.preventDefault(); // Prevent default HTML form submission
 
         // --- Updated Validation ---
-        // Now also checks if altName is empty
         if (!name.trim() || !category.trim() || !altName.trim()) {
             alert("Please fill in all required fields: Software Name, Category, and Alternative Name.");
             return; // Stop submission if any required field is empty
         }
-        // --- --- --- --- --- --- ---
 
         // --- Construct the alternatives array ---
-        // Since altName is now required, this array will always have at least one element.
         const alternativesArray = [];
-        // We already checked altName.trim() above, but double-check doesn't hurt
         if (altName.trim()) {
             alternativesArray.push({
                 name: altName.trim(),
@@ -40,7 +34,6 @@ function AddEntryForm({ onAddEntry }) {
              alert("An error occurred. Alternative Name is required.");
              return;
         }
-        // --- --- --- --- --- --- --- --- --- ---
 
         // --- Prepare the final data object to be passed up ---
         const newEntryData = {
@@ -48,9 +41,8 @@ function AddEntryForm({ onAddEntry }) {
             category: category.trim(),
             description: description.trim(),
             alternatives_string: alternativesArray.map(a => `${a.name} (${a.type}, ${a.cost}) ${a.link ? '- ' + a.link : ''}`).join('\n'), // Will have at least one line now
-            alternatives_array: alternativesArray // Will have at least one element now
+            alternatives_array: alternativesArray // Will have at least one element 
         };
-        // --- --- --- --- --- --- --- --- --- --- --- --- ---
 
         // Call the handler function passed via props
         onAddEntry(newEntryData);
@@ -105,7 +97,6 @@ function AddEntryForm({ onAddEntry }) {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
                         <div>
-                            {/* Consider adding required to Type and Cost if they are always needed when Name is present */}
                             <label htmlFor="formAltType" className="block text-sm font-medium text-gray-700 mb-1">Type</label>
                             <select id="formAltType" value={altType} onChange={(e) => setAltType(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
                                 <option>Open Source</option>
@@ -127,7 +118,6 @@ function AddEntryForm({ onAddEntry }) {
                     </div>
                 </fieldset>
 
-                {/* Submit Button */}
                 <button
                     type="submit"
                     className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"

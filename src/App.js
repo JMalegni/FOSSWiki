@@ -36,7 +36,6 @@ function App() {
   }, []); // Runs once on mount
 
   // --- EmailJS Submission Handler ---
-  // (Handles sending email for contributions)
   const handleAddEntry = (formData) => {
       console.log("Form data for EmailJS:", formData);
 
@@ -53,7 +52,6 @@ function App() {
       }
       
       // --- Create the structured data object for JSON ---
-        // Use the original array of alternatives here
         const dataForJson = {
           name: formData.name,
           category: formData.category,
@@ -62,7 +60,6 @@ function App() {
       };
 
       // --- Generate the JSON string ---
-      // Use null, 2 for pretty-printing with indentation (optional, but nice for email)
       let jsonDataString;
       try {
            jsonDataString = JSON.stringify(dataForJson, null, 2);
@@ -72,7 +69,7 @@ function App() {
           return;
       }
 
-      // Prepare template params - ensure these match your EmailJS template
+      // Prepare template params - must match EmailJS template
       const templateParams = {
         name: formData.name,
         category: formData.category,
@@ -95,7 +92,6 @@ function App() {
   };
 
   // --- Navigation Handler ---
-  // (Updated to include 'admin' page)
   const handleNavigate = (page) => {
        // Define valid pages
       const validPages = ['wiki', 'contribute', 'about', 'admin'];
@@ -108,7 +104,6 @@ function App() {
   };
 
   // --- Render Current Page ---
-  // (Updated to include 'admin' case)
   const renderPage = () => {
       switch (currentPage) {
           case 'wiki':
@@ -145,7 +140,7 @@ function App() {
               <button
                   onClick={() => handleNavigate('admin')}
                   className="ml-4 text-xs text-indigo-600 hover:underline focus:outline-none"
-                  aria-label="Admin Access" // Accessibility
+                  aria-label="Admin Access"
               >
                   (Admin)
               </button>
